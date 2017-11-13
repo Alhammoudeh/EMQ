@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}EMQ Sign in{% endblock %}
+
+{% block page_content %}
+
+<form name="login" action = "{{ url_for('checkUser') }}" method = "POST">
+	<div class="form-group">
+		<label for="username" class="control-label">
+				Username</label>
+		<input type="text" class="form-control" id="username" name="username" placeholder="Username" value="" required="">
+	</div>
+
+	<div class="form-group">
+		<label for="pass" class="control-label">
+				Password</label>
+		<input type="password" class="form-control" id="pass" name="pass" placeholder="Password" required="">
+	</div>
+
+	<input type = "submit" value = "Log In" class="button buttonBlue"/><br>
+	<!--				
+	<button type="button" onclick = "check(this.confirm)" class="button buttonBlue">Log in
+  
+	<div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+	</button>
+    -->
+	<a id ="createButton" class ="button buttonBlue" >Sign up</a>
+		<script type="text/javascript">
+			document.getElementById("createButton").onclick = function () {
+				location.href = "http://127.0.0.1:5000/createAccount";
+			};
+			function check(confirm){
+				if(form.Username.value == form.Password.value){
+					window.open('http://127.0.0.1:5000/home');
+				}
+				else{
+					alert("Incorrect Password or Username");
+				}
+			}
+		</script>
+</form>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+
+{% block title %}EMQ - Products{% endblock %}
+{% block page_content %}
+<div class="page-header">
+    
+<!-- Add to cart button should not be there if there is no stock -->
+<div class="container">
+    <h1 align = 'center'>Welcome to EMQ Products Page! </h1>
+    
+    <form class="form form-horizontal" name="searchbar" action = "{{ url_for('products') }}" method = "POST">
+        <input type="text" name="search" placeholder="Search for something..">
+    </form>
+    
+    <div id="products" class="row list-group">
+    {% for product in products %}
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                <!-- Not Final Logo, just temporary -->
+                <img src="{{product[2]}}"  width = 150 height = 300/> 
+                <div class="caption"><a class="group inner list-group-item-heading" href="/sproduct?id={{product[0]}}">
+                    <h4 >
+                        {{product[1]}}</h4></a>
+                    <p class="group inner list-group-item-text">{{product[4]}}
+                        </p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                {{product[3]}}</p>
+                        </div>
+						{% if product[7] < 1 %}
+						<div class="col-xs-12 col-md-6">  
+							<p>Out of stock.</p>
+						</div>
+						{% else %}						
+						<div class="col-xs-12 col-md-6">
+							<a class="btn btn-success" href="./product/{{product[0]}}">Add to cart</a>
+						</div>
+						{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>      
+
+
+{% endblock %}
